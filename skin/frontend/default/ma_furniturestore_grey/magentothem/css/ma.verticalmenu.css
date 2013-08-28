@@ -41,15 +41,22 @@
     padding:6px 10px;
     color:#575757;
     font-size: 13px;
+}
+#ma-dropdown .parent a {
 	background: url("../images/bullet-left.png") no-repeat scroll 185px 50% transparent;
 }
 #ma-dropdown li.over a,
 #ma-dropdown a:hover {
     color:#D43E03;
+}
+#ma-dropdown li.over.parent a,
+#ma-dropdown .parent a:hover {
 	background: url("../images/bullet-left-act.png") no-repeat scroll 185px 50% transparent;
 }
 #ma-dropdown li.active a {
     color:#D43E03;
+}
+#ma-dropdown li.active.parent a {
 	background: url("../images/bullet-left-act.png") no-repeat scroll 185px 50% transparent;
 }
 /* 1st Level */
