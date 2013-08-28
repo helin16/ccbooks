@@ -783,4 +783,11 @@ abstract class Mage_Eav_Model_Entity_Attribute_Abstract extends Mage_Core_Model_
         }
         return $this->_getResource()->getFlatUpdateSelect($this, $store);
     }
+    /**
+     * destructor
+     */
+    public function __destruct()
+    {
+        unset($this->_backend);
+    }
 }
