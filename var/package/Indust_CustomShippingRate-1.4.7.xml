@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<package>
+    <name>Indust_CustomShippingRate</name>
+    <version>1.4.7</version>
+    <stability>stable</stability>
+    <license uri="http://www.opensource.org/licenses/osl-3.0.php">OSL v3.0</license>
+    <channel>community</channel>
+    <extends/>
+    <summary>Adds ability to specify a custom shipping rate and title when creating a new order in backend.</summary>
+    <description>Adds ability to specify a custom shipping rate and title when creating a new order in backend.</description>
+    <notes>1.4.7 - Fixed custom method showing in multi-address checkout. Fixed custom method showing on PayPal Express review page in Magento 1.4.1.0 or higher.
+1.4.6 - Fixed multiple currency issue.
+1.4.5 - Fixed double price bug. Fixed custom method showing on Paypal Express review page.
+1.4.4 - Added Magento 1.4 compatibility. Fixed currency issue.
+1.2.2 - Complete rewrite. Includes custom shipping module.
+1.0.2 - Fixed issue with shipping amount being applied twice in shopping cart and checkout.
+1.0.1 - Removed extra &lt;/label&gt; tag.
+1.0.0 - Fixed issue with auto-save. Changed stability to Stable.
+0.1.3 - Added auto-save functionality.
+0.1.2 - Fixed character encoding in French translation file.
+0.1.1 - Added English and French translation files.
+0.1.0 - Initial Release.</notes>
+    <authors><author><name>Jeff Kieke</name><user>auto-converted</user><email>jeffk@industrialtechware.com</email></author></authors>
+    <date>2010-09-17</date>
+    <time>17:59:31</time>
+    <contents><target name="magedesign"><dir name="adminhtml"><dir name="default"><dir name="default"><dir name="layout"><file name="indust_customshippingrate.xml" hash="a5be547e14c0a3db18b03c10e72c9999"/></dir><dir name="template"><dir name="indust"><dir name="customshippingrate"><file name="form_custom.phtml" hash="1253aa31194feb15ee679db687d6c52d"/></dir></dir></dir></dir></dir></dir></target><target name="magelocale"><dir name="en_US"><file name="Indust_CustomShippingRate.csv" hash="6dfd8b9f00455c357bc61f501a3cb86b"/></dir><dir name="fr_FR"><file name="Indust_CustomShippingRate.csv" hash="88faee56250c4ed68b616a1869364c58"/></dir></target><target name="magecommunity"><dir name="Indust"><dir name="CustomShippingRate"><dir name="Block"><dir name="Cart"><file name="Shipping.php" hash="3f4238ebdb5195a7b14198aced69995d"/></dir><dir name="Express"><file name="Review.php" hash="f7a07266bb466f361159d765ee7e0a67"/></dir><dir name="Multishipping"><file name="Shipping.php" hash="99898eb4b8bab174536705d6634d7395"/></dir><dir name="Onepage"><dir name="Shipping"><dir name="Method"><file name="Available.php" hash="c15b94e8bbfc2b90c71f500c9b8f7446"/></dir></dir></dir><dir name="Sales"><dir name="Order"><dir name="Create"><dir name="Shipping"><dir name="Method"><file name="Form.php" hash="333ca6b2ad7e51a92dc58318de985901"/></dir></dir></dir></dir></dir></dir><dir name="etc"><file name="config.xml" hash="bb437f94b4ad2a66ed088c24e7571f1a"/><file name="system.xml" hash="89b7cd6b5bfab7825172c8a93751b9dd"/></dir><dir name="Helper"><file name="Data.php" hash="753f74142547eea446efd6b8e866b7ae"/></dir><dir name="Model"><dir name="Carrier"><file name="Customshippingrate.php" hash="1f8c479d907874779e71ea6e255da169"/></dir><dir name="Quote"><dir name="Address"><dir name="Total"><file name="Shipping.php" hash="234177c398646a5332f069fb48298320"/></dir></dir></dir><dir name="Sales"><dir name="Order"><file name="Create.php" hash="c423a006e56c6dc3dbe9dab4b979c7ff"/></dir></dir><dir name="Service"><file name="Quote.php" hash="63653aea1b74483e3b540f523a61f548"/></dir></dir></dir></dir></target><target name="mageetc"><dir name="modules"><file name="Indust_CustomShippingRate.xml" hash="fdb2857c71378d410f6d329d279fc3d7"/></dir></target></contents>
+    <compatible/>
+    <dependencies/>
+</package>
