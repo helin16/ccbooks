@@ -5,7 +5,7 @@
 			<active>true</active>
 			<codePool>community</codePool>
 			<depends>
-				<W4U_Paymate />
+				<Mage_Payment />
            	</depends>
 		</W4U_Paymate>
 	</modules>
