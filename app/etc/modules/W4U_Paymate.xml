@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<W4U_Paymate>
+			<active>true</active>
+			<codePool>community</codePool>
+			<depends>
+				<W4U_Paymate />
+           	</depends>
+		</W4U_Paymate>
+	</modules>
+</config>
