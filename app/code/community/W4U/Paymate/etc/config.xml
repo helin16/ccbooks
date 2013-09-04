@@ -83,13 +83,12 @@
         <payment>
             <paymate>
                 <active>0</active>
-                <cctypes>VI,MC</cctypes>
+                <cctypes>AE,VI,MC</cctypes>
                 <cgi_url>https://www.paymate.com/PayMate/TestExpressPayment</cgi_url>
                 <model>paymate/paymate</model>
-                <order_status>1</order_status>
-                <test>1</test>
-                <title>Credit Card - Paymate</title>
-                <username></username>
+                <order_status>pending</order_status>
+                <title>Paymate Express</title>
+                <username>demonstration</username>
                 <allowspecific>0</allowspecific>
             </paymate>
         </payment>

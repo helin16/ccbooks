@@ -30,6 +30,14 @@
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
                     <show_in_store>0</show_in_store>
+                    <comment>
+		              <![CDATA[
+		                <div style="padding:10px;background-color:#fff;border:1px solid #ddd;margin-bottom:7px;">
+		                  This module was developed by <a href="http://www.websiteforyou.com.au" target="_blank">www.WebsiteForYou.com.au</a> for Paymate Express Payment.
+		                  You can click <a href="http://www.paymate.com.au/cms/index.php/sellers/why-sell-with-paymate/registration-guide" target="_blank"> HERE </a> to create a paymate account.
+		                </div>
+		              ]]>
+		           </comment>
                     <fields>
                         <active translate="label">
                             <label>Enabled</label>
@@ -66,7 +74,7 @@
                             <show_in_store>0</show_in_store>
                         </title>
 						<username translate="label">
-							<label>Username</label>
+							<label><![CDATA[StoreUser For Paymate<div><a href="http://www.paymate.com.au/cms/index.php/sellers/why-sell-with-paymate/registration-guide" target="_blank">Don't have an acocunt yet?</a></div>]]></label>
 							<frontend_type>text</frontend_type>
 							<sort_order>61</sort_order>
 							<show_in_default>1</show_in_default>
@@ -74,7 +82,7 @@
 							<show_in_store>1</show_in_store>
 						</username>
 						<cgi_url translate="label">
-							<label>Gateway CGI URL</label>
+							<label><![CDATA[Gateway CGI URL<div><a href="#">Remember to change this when golive!</a></div>]]></label>
 							<frontend_type>text</frontend_type>
 							<sort_order>62</sort_order>
 							<show_in_default>1</show_in_default>

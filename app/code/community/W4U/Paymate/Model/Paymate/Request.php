@@ -1,6 +1,6 @@
 <?php
 /**
- * W4U Paymate Extension
+ * W4U Paymate request object
  *
  * NOTICE OF LICENSE
  *

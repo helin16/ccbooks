@@ -1,6 +1,6 @@
 <?php
 /**
- * W4U Paymate Extension
+ * W4U Paymate Payment Module
  *
  * NOTICE OF LICENSE
  *
@@ -17,13 +17,6 @@
  * @copyright  Copyright (c) 2013 http://websiteforyou.com.au
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
-
-/**
- * Paymate payment model
- *
- * @category   W4U
- * @package    W4U_Australia
- */
 class W4U_Paymate_Model_Paymate extends Mage_Payment_Model_Method_Abstract
 {
     const CGI_URL = 'https://www.paymate.com/PayMate/ExpressPayment';
@@ -35,6 +28,7 @@ class W4U_Paymate_Model_Paymate extends Mage_Payment_Model_Method_Abstract
     protected $_allowCurrencyCode = array('AUD', 'EUR', 'GBP', 'NZD', 'USD');
     
     protected $_isGateway               = false;
+    protected $_isInitializeNeeded      = true;
     protected $_canAuthorize            = false;
     protected $_canCapture              = true;
     protected $_canCapturePartial       = false;
@@ -47,50 +41,47 @@ class W4U_Paymate_Model_Paymate extends Mage_Payment_Model_Method_Abstract
     /**
      * Assign data to info model instance
      *
-     * @param   mixed $data
-     * @return  W4U_Australia_Model_Payment_Paymate
+     * @param   mixed $data The request data
+     * 
+     * @return  W4U_Paymate_Model_Paymate
      */
     public function assignData($data)
     {
         $details = array();
-        if ($this->getUsername())
-        {
+        if ($this->getUsername()) {
             $details['username'] = $this->getUsername();
         }
-        if (!empty($details)) 
-        {
+        if (!empty($details)) {
             $this->getInfoInstance()->setAdditionalData(serialize($details));
         }
         return $this;
     }
-
+    /**
+     * Getting the store username for paymate
+     */
     public function getUsername()
     {
         return $this->getConfigData('username');
     }
-    
+    /**
+     * Getting the CGI_uri for paymate
+     * 
+     * @return Ambigous <string, mixed, NULL, multitype:, multitype:Ambigous <string, multitype:, NULL> >
+     */
     public function getUrl()
     {
     	$url = $this->getConfigData('cgi_url');
-    	
-    	if(!$url)
-    	{
-    		$url = self::CGI_URL_TEST;
-    	}
-    	
-    	return $url;
+    	return (!$url ? self::CGI_URL_TEST : $url);
     }
-    
     /**
      * Get session namespace
      *
-     * @return W4U_Australia_Model_Payment_Paymate_Session
+     * @return W4U_Paymate_Model_Paymate_Session
      */
     public function getSession()
     {
         return Mage::getSingleton('paymate/paymate_session');
     }
-
     /**
      * Get checkout session namespace
      *
@@ -100,8 +91,16 @@ class W4U_Paymate_Model_Paymate extends Mage_Payment_Model_Method_Abstract
     {
         return Mage::getSingleton('checkout/session');
     }
-
     /**
+     * Get current the saved Order
+     *
+     * @return Mage_Sales_Model_Order
+     */
+    public function getOrder()
+    {
+        return Mage::getModel('sales/order')->load(Mage::getSingleton('checkout/session')->getLastOrderId());
+    }
+	/**
      * Get current quote
      *
      * @return Mage_Sales_Model_Quote
@@ -110,52 +109,53 @@ class W4U_Paymate_Model_Paymate extends Mage_Payment_Model_Method_Abstract
     {
         return $this->getCheckout()->getQuote();
     }
-
+    /**
+     * getting the checkout form fields
+     * 
+     * @return array The fields data
+     */
 	public function getCheckoutFormFields()
 	{
-		$a = $this->getQuote()->getShippingAddress();
-		$b = $this->getQuote()->getBillingAddress();
-		$currency_code = $this->getQuote()->getCurrencyCode();
-		$cost = $a->getSubtotal() - $a->getDiscountAmount();
-		$shipping = $a->getShippingAmount();
+	    $order = $this->getOrder();
+		$shippAddr = $order->getShippingAddress();
+		$billAddr = $order->getBillingAddress();
+		$currency_code = $order->getOrderCurrencyCode();
+// 		$cost = $shippAddr->getSubtotal() - $shippAddr->getDiscountAmount();
+// 		$shipping = $shippAddr->getShippingAmount();
 
-		$_shippingTax = $this->getQuote()->getShippingAddress()->getTaxAmount();
-		$_billingTax = $this->getQuote()->getBillingAddress()->getTaxAmount();
-		$tax = sprintf('%.2f', $_shippingTax + $_billingTax);
-		$cost = sprintf('%.2f', $cost + $tax);
-		
+// 		$_shippingTax = $this->getQuote()->getShippingAddress()->getTaxAmount();
+// 		$_billingTax = $this->getQuote()->getBillingAddress()->getTaxAmount();
+// 		$tax = sprintf('%.2f', $_shippingTax + $_billingTax);
+// 		$cost = sprintf('%.2f', $cost + $tax);
+		$cost = $order->getGrandTotal();
 		$fields = array(
 			'mid'					=> $this->getUsername(),
+			'ref'					=> $this->getCheckout()->getLastRealOrderId(),
 			'amt'					=> sprintf('%.2f', $cost + $shipping),
 			'amt_editable'			=> self::REQUEST_AMOUNT_EDITABLE,
 			'currency'				=> $currency_code,
-			'ref'					=> $this->getCheckout()->getLastRealOrderId(),
-			'pmt_sender_email'		=> $b->getEmail(),
-			'pmt_contact_firstname'	=> $b->getFirstname(),
-			'pmt_contact_surname'	=> $b->getLastname(),
-			'pmt_contact_phone'		=> $b->getTelephone(),
-			'pmt_country'			=> $b->getCountry(),
-			'regindi_address1'		=> $b->getStreet(1),
-			'regindi_address2'		=> $b->getStreet(2),
-			'regindi_sub'			=> $b->getCity(),
-			'regindi_state'			=> $b->getRegion(),		// Returns full state name
-			'regindi_pcode'			=> $b->getPostcode(),
+			'pmt_sender_email'		=> $billAddr->getEmail(),
+			'pmt_contact_firstname'	=> $billAddr->getFirstname(),
+			'pmt_contact_surname'	=> $billAddr->getLastname(),
+			'pmt_contact_phone'		=> $billAddr->getTelephone(),
+			'pmt_country'			=> $billAddr->getCountry(),
+			'regindi_address1'		=> $billAddr->getStreet(1),
+			'regindi_address2'		=> $billAddr->getStreet(2),
+			'regindi_sub'			=> $billAddr->getCity(),
+			'regindi_state'			=> $billAddr->getRegion(),		// Returns full state name
+			'regindi_pcode'			=> $billAddr->getPostcode(),
 			'return'				=> Mage::getUrl('paymate/paymate/complete'),
 			'popup'					=> 'N',
 		);
-
-		// Run through fields and replace any occurrences of & with the word 
-		// 'and', as having an ampersand present will conflict with the HTTP
-		// request.
-		$filtered_fields = array();
-        foreach ($fields as $k=>$v) {
-            $value = str_replace("&","and",$v);
-            $filtered_fields[$k] =  $value;
-        }
-        
-        return $filtered_fields;
+		return $fields;
 	}
-
+    /**
+     * Creating form block 
+     * 
+     * @param string $name The name of the form
+     * 
+     * @return W4U_Paymate_Block_Form
+     */
     public function createFormBlock($name)
     {
         $block = $this->getLayout()->createBlock('paymate/paymate_form', $name)
@@ -165,8 +165,10 @@ class W4U_Paymate_Model_Paymate extends Mage_Payment_Model_Method_Abstract
 
         return $block;
     }
-
-    /*validate the currency code is avaialable to use for paypal or not*/
+    /**
+     * (non-PHPdoc)
+     * @see Mage_Payment_Model_Method_Abstract::validate()
+     */
     public function validate()
     {
         parent::validate();
@@ -176,24 +178,13 @@ class W4U_Paymate_Model_Paymate extends Mage_Payment_Model_Method_Abstract
         }
         return $this;
     }
-
-    public function onOrderValidate(Mage_Sales_Model_Order_Payment $payment)
-    {
-       return $this;
-    }
-
-    public function onInvoiceCreate(Mage_Sales_Model_Invoice_Payment $payment)
-    {
-
-    }
-
-    public function canCapture()
-    {
-        return true;
-    }
-
+    /**
+     * Getting the url for redirecting when paymate success
+     * 
+     * @return string
+     */
     public function getOrderPlaceRedirectUrl()
     {
-          return Mage::getUrl('paymate/paymate/redirect');
+        return Mage::getUrl('paymate/paymate/start');
     }
 }

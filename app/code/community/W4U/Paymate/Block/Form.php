@@ -17,7 +17,6 @@
  * @copyright  Copyright (c) 2013 http://websiteforyou.com.au
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
-
 class W4U_Paymate_Block_Form extends Mage_Payment_Block_Form
 {
 	/**

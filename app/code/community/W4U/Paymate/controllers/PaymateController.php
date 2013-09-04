@@ -1,6 +1,6 @@
 <?php
 /**
- * W4U Paymate Extension
+ * W4U Paymate Controller
  *
  * NOTICE OF LICENSE
  *
@@ -17,32 +17,74 @@
  * @copyright  Copyright (c) 2013 http://websiteforyou.com.au
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
-
-/**
- * Paymate Checkout Controller
- *
- */
 class W4U_Paymate_PaymateController extends Mage_Core_Controller_Front_Action
 {
+    /**
+     * removing the ajax
+     * 
+     * @return W4U_Paymate_PaymateController
+     */
     protected function _expireAjax()
     {
-        if (!Mage::getSingleton('checkout/session')->getQuote()->hasItems()) {
+        if (!$this->_getQuote()->hasItems()) {
             $this->getResponse()->setHeader('HTTP/1.1','403 Session Expired');
             exit;
         }
+        return $this;
     }
-
+    /**
+     * Getting the paymate model object
+     * 
+     * @return W4U_Paymate_Model_Paymate
+     */
+    private function _getModel()
+    {
+        return Mage::getModel('paymate/paymate');
+    }
+    /**
+     * Get checkout session namespace
+     *
+     * @return Mage_Checkout_Model_Session
+     */
+    private function _getCheckoutSession()
+    {
+        return $this->_getModel()->getCheckout();
+    }
+    /**
+     * Get current quote
+     *
+     * @return Mage_Sales_Model_Quote
+     */
+    private function _getQuote()
+    {
+        return $this->_getModel()->getCheckout()->getQuote();
+    }
     /**
      * When a customer chooses Paymate on Checkout/Payment page
+     * 
+     * @return W4U_Paymate_PaymateController
      */
-    public function redirectAction()
+    public function startAction()
     {
-        $session = Mage::getSingleton('checkout/session');
-        $session->setPaymateQuoteId($session->getQuoteId());
-        $this->getResponse()->setBody($this->getLayout()->createBlock('paymate/redirect')->toHtml());
-        $session->unsQuoteId();
+        try {
+            $session = $this->_getCheckoutSession();
+            $session->setPaymateQuoteId($session->getQuoteId());
+            if($this->_getModel()->getOrder()->getStatus() !== $this->_getModel()->getConfigData('order_status'))
+                Mage::throwException(Mage::helper('checkout')->__('You can NOT resubmit the payment anymore.'));
+            $form = $this->getLayout()->createBlock('paymate/redirect')->toHtml();
+//             echo '<textarea>';
+//             echo '</textarea>';
+            $this->getResponse()->setBody($form);
+            $session->unsQuoteId();
+            return $this;
+        } catch (Mage_Core_Exception $e) {
+            $this->_getCheckoutSession()->addError($e->getMessage());
+        } catch (Exception $e) {
+            $this->_getCheckoutSession()->addError($this->__('Unable to start Express Checkout.'));
+            Mage::logException($e);
+        }
+        $this->_redirect('checkout/cart');
     }
-
     /**
      * When a customer cancels payment from Paymate.
      * Currently this never actually occurs as Paymate does not provide a way
@@ -54,7 +96,6 @@ class W4U_Paymate_PaymateController extends Mage_Core_Controller_Front_Action
         $session->setQuoteId($session->getPaymateQuoteId(true));
         $this->_redirect('checkout/cart');
      }
-
     /**
      * Where Paymate returns.
      * Paymate currently always returns the same code so there is little point
@@ -64,7 +105,7 @@ class W4U_Paymate_PaymateController extends Mage_Core_Controller_Front_Action
     {
         if (!$this->getRequest()->isPost()) {
             $this->norouteAction();
-            return;
+            return $this;
         }
         
         $session = Mage::getSingleton('checkout/session');
@@ -86,7 +127,7 @@ class W4U_Paymate_PaymateController extends Mage_Core_Controller_Front_Action
             // Declined
             $this->_cancelOrder($response);
             $this->_redirect('checkout/onepage/failure');
-            return;
+            return $this;
         }
         
         // Set the quote as inactive after returning from Paymate
@@ -121,13 +162,16 @@ class W4U_Paymate_PaymateController extends Mage_Core_Controller_Front_Action
 			$order->addStatusToHistory($order->getStatus(), $text);
 			$order->save();
 		}
-		
-
         Mage::getSingleton('checkout/session')->unsQuoteId();
-
         $this->_redirect('checkout/onepage/success');
     }
-
+    /**
+     * Canceling the order
+     * 
+     * @param array $response The response from Paymate
+     * 
+     * @return W4U_Paymate_PaymateController
+     */
 	protected function _cancelOrder($response)
 	{
 	    $session = Mage::getSingleton('checkout/session');
@@ -136,6 +180,7 @@ class W4U_Paymate_PaymateController extends Mage_Core_Controller_Front_Action
         $order->cancel();
         $order->addStatusToHistory($order->getStatus(), Mage::helper('paymate')->__('Payment was declined by gateway.<br />Transaction ID: ' . $response['transactionID']));
         $order->save();
+        return $this;
 	}
 
 }
