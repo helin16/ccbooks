@@ -178,9 +178,7 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
     <td class="a-center">
         <input name="cart[<?php echo $_item->getId() ?>][qty]" value="<?php echo $this->getQty() ?>" size="4" title="<?php echo $this->__('Qty') ?>" class="input-text qty" maxlength="12" />
         <div>
-        	<?php if ($isVisibleProduct): ?>
-            	<a href="<?php echo $this->getConfigureUrl() ?>" title="<?php echo $this->__('Edit item parameters') ?>"><?php echo $this->__('Edit') ?></a>
-            <?php endif ?>
+        	<a href="javascript: void(0);" onclick="if(jQuery('.button.btn-update[value=update_qty]')){jQuery('.button.btn-update[value=update_qty]').click();} return false;"><?php echo $this->__('Edit') ?></a>
         </div>
     </td>
     <?php if (($this->helper('tax')->displayCartPriceExclTax() || $this->helper('tax')->displayCartBothPrices()) && !$_item->getNoSubtotal()): ?>
