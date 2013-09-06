@@ -31,7 +31,7 @@ class W4U_Paymate_Block_Redirect extends Mage_Core_Block_Abstract
         $form->setAction($paymate->getUrl())
             ->setId('paymate_checkout')
             ->setName('paymate_checkout')
-            ->setMethod('POST')
+            ->setMethod('GET')
             ->setUseContainer(true);
         foreach ($paymate->getCheckoutFormFields() as $field=>$value) {
             $form->addField($field, 'hidden', array('name'=>$field, 'value'=>$value));
