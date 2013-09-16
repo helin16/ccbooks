@@ -1,0 +1,4 @@
+AddDefaultCharset utf-8
+<IfModule mod_rewrite.c>
+RewriteEngine Off
+</IfModule>
