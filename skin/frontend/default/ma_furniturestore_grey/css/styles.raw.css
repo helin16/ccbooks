@@ -6205,7 +6205,8 @@ tr.summary-details-excluded {
 }
 .priceratingwrapper {
     border-bottom: 1px solid #DADADA;
-    padding: 5px 0;
+    padding: 2px 0;
+    margin: 5px 0;
 }
 .priceWrapper {
     width: 75%;
