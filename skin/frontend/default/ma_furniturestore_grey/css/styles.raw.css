@@ -1652,6 +1652,8 @@ tr.summary-details-excluded {
 .header .links a {
     color: #000000;
     font-size: 12px;
+    height: 16px;
+    display: inline-block;
 }
 
 .ma-header-container .top-container {
@@ -6229,4 +6231,8 @@ tr.summary-details-excluded {
 
 .displayinline {
     display: inline-block;
+}
+a.top-link-cart {
+	background: url(./../images/shoppingcart.png) 0 0 no-repeat;
+	padding: 0 0 0 22px;
 }
