@@ -29,7 +29,7 @@
     <span class="priceWrapper displayinline">
         <?php $_product = $this->getProduct() ?>
         <?php if ($_product->getchinese_price()): ?>
-            <span class="chinese_price">RMB ￥<?php echo number_format($_product->getchinese_price(), 2, '.', ',') ?></span>
+            <span class="chinese_price displayinline">RMB ￥<?php echo number_format($_product->getchinese_price(), 2, '.', ',') ?></span>
         <?php endif; ?>
         <?php echo $this->getChildHtml('product_type_data_extra') ?>
         <?php echo $this->getPriceHtml($_product) ?>
