@@ -36,7 +36,7 @@
     </span>
     <span class="ratingWrapper displayinline">
         <?php if ($_product->getrating() && trim($_product->getrating()) !== '' && intval($_product->getrating()) > 0): ?>
-           <span class="rating_stars"><span class="rating_stars fontend" style="width: <?php echo intval($_product->getrating()) >= 5 ? '100%' : ceil((intval($_product->getrating()) / 5) * 100) . '%'?>"></span></span>
+           <span class="rating_stars"><span class="rating_stars fontend" style="width: <?php echo intval($_product->getrating()) >= 5 ? '100%' : ceil((intval($_product->getrating()) / 5) * 100) . '%'?>" debug="<?php echo intval($_product->getrating()) . "|" . (intval($_product->getrating())/5) . "|" . ceil(intval($_product->getrating())/5)?>"></span></span>
         <?php endif; ?>
     </span>
 </div>
