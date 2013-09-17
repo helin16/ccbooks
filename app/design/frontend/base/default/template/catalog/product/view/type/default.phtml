@@ -25,12 +25,18 @@
  */
 ?>
 <?php /* @var $this Mage_Catalog_Block_Product_View_Abstract */?>
-<?php $_product = $this->getProduct() ?>
-<?php if ($_product->getchinese_price()): ?>
-    <p class="chinese_price">RMB ￥<?php echo round($_product->getchinese_price(),2) ?></p>
-<?php endif; ?>
-<?php if ($_product->getrating() && trim($_product->getrating()) !== '' && intval($_product->getrating()) > 0): ?>
-   <span class="rating_stars"><span class="rating_stars fontend" style="width: <?php echo intval($_product->getrating()) >= 5 ? '100%' : ceil((intval($_product->getrating()) / 5)) . '%'?>"></span></span>
-<?php endif; ?>
-<?php echo $this->getChildHtml('product_type_data_extra') ?>
-<?php echo $this->getPriceHtml($_product) ?>
+<div>
+    <span class="priceWrapper displayinline">
+        <?php $_product = $this->getProduct() ?>
+        <?php if ($_product->getchinese_price()): ?>
+            <span class="chinese_price">RMB ￥<?php echo number_format($_product->getchinese_price(), 2, '.', ',') ?></span>
+        <?php endif; ?>
+        <?php echo $this->getChildHtml('product_type_data_extra') ?>
+        <?php echo $this->getPriceHtml($_product) ?>
+    </span>
+    <span class="ratingWrapper displayinline">
+        <?php if ($_product->getrating() && trim($_product->getrating()) !== '' && intval($_product->getrating()) > 0): ?>
+           <span class="rating_stars"><span class="rating_stars fontend" style="width: <?php echo intval($_product->getrating()) >= 5 ? '100%' : ceil((intval($_product->getrating()) / 5)) . '%'?>"></span></span>
+        <?php endif; ?>
+    </span>
+</div>
