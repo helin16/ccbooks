@@ -6203,9 +6203,11 @@ tr.summary-details-excluded {
     color: red;
     text-decoration: line-through;
 }
+.priceratingwrapper {
+    border-bottom: 1px solid #DADADA;
+}
 .priceWrapper {
     width: 75%;
-    border-bottom: 1px solid #DADADA;
 }
 .product-view .product-shop .priceWrapper .price-box {
     margin: 0px;
