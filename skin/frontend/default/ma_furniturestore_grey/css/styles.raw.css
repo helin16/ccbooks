@@ -1650,7 +1650,8 @@ tr.summary-details-excluded {
 }
 
 .header .links a {
-    color: #818181;
+    color: #000000;
+    font-size: 12px;
 }
 
 .ma-header-container .top-container {
