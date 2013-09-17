@@ -3,36 +3,6 @@
     <default>
         <reference name="root">
             <reference name="top.links">
-                <!-- Add custom links. Pretty self-explanatory.
-                Dig into app/code/core/Mage/Page/Block/Template/Links.php for more info -->
-                <action method="addLink" translate="label title">
-                    <label>About Us</label>
-                    <url>about</url>  <!-- can use full url also -->
-                    <title>About Us</title>
-                    <prepare>true</prepare> <!-- set true if adding base url param -->
-                    <urlParams helper="core/url/getHomeUrl"/> <!-- base url - thanks @Russ! -->
-                    <!-- there are a few param you can send to do different things in <urlParams> 
-                             dig into app/code/core/Mage/Core/Model/Url.php, around line 803 -->                   
- 
-                    <!-- below adds #add-fragment to the end of your url -->
-                    <!-- <urlParams><_fragment>add-fragment</_fragment></urlParams> -->
- 
-                    <!-- below adds ?add-query to the end of your url -->
-                    <!-- <urlParams><_query>add-fragment</_query></urlParams> -->
- 
-                    <!-- below gives you a new session id (i think...)-->
-                    <!-- <urlParams><_nosid>true</_nosid></urlParams> -->
- 
-                    <!-- below replaces double quotes, single quotes, greater than, and less than signs 
-                             to their respective url escaped replacements (%22, %27, %3E, %3C) -->
-                    <!-- <urlParams><_escape>i'm-a-blog-url</_escape></urlParams> -->
- 
-                    <position>1</position>
-                    <liParams/>
-                    <aParams>class="top-link-about-us"</aParams>
-                    <beforeText></beforeText>
-                    <afterText></afterText>
-                </action>
  
                 <!-- Removes 'My Account' link - Default position: 10 -->
                 <action method="removeLinkByUrl"><url helper="customer/getAccountUrl"/></action>
@@ -50,9 +20,44 @@
  
                 <!-- To re-add 'My Cart' or 'Checkout' after removing both -->
                 <block type="checkout/links" name="checkout_cart_link_custom">
-                    <action method="addCartLink"></action>
-                    <action method="addCheckoutLink"></action>
+                    <action method="addCartLink"><position>1</position></action>
                 </block>
+                
+                <action method="addLink" translate="label title">
+                    <label>My Account</label>
+                    <url>customer/account/</url>  <!-- can use full url also -->
+                    <title>My Account</title>
+                    <prepare>true</prepare> 
+                    <position>2</position>
+                    <liParams/>
+                    <aParams></aParams>
+                    <beforeText></beforeText>
+                    <afterText></afterText>
+                </action>
+                
+                <action method="addLink" translate="label title">
+                    <label>My Wishlist</label>
+                    <url>wishlist</url>  <!-- can use full url also -->
+                    <title>My Wishlist</title>
+                    <prepare>true</prepare> 
+                    <position>3</position>
+                    <liParams/>
+                    <aParams></aParams>
+                    <beforeText></beforeText>
+                    <afterText></afterText>
+                </action>
+                
+                <action method="addLink" translate="label title">
+                    <label>Login</label>
+                    <url helper="customer/getLoginUrl"/>  <!-- can use full url also -->
+                    <title>Login</title>
+                    <prepare>true</prepare> 
+                    <position>4</position>
+                    <liParams/>
+                    <aParams></aParams>
+                    <beforeText></beforeText>
+                    <afterText></afterText>
+                </action>
             </reference>
         </reference>
     </default>
