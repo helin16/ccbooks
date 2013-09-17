@@ -26,11 +26,11 @@
 ?>
 <?php /* @var $this Mage_Catalog_Block_Product_View_Abstract */?>
 <?php $_product = $this->getProduct() ?>
-
-<?php if ($_product->isAvailable()): ?>
-    <p class="availability in-stock"><?php echo $this->__('Availability:') ?> <span><?php echo $this->__('In stock') ?></span></p>
-<?php else: ?>
-    <p class="availability out-of-stock"><?php echo $this->__('Availability:') ?> <span><?php echo $this->__('Out of stock') ?></span></p>
+<?php if ($_product->getchinese_price()): ?>
+    <p class="chinese_price">RMB ￥<?php echo $_product->getchinese_price() ?></p>
+<?php endif; ?>
+<?php if ($_product->getrating() && trim($_product->getrating()) !== '' && intval($_product->getrating()) > 0): ?>
+   <span class="rating_stars"><span class="rating_stars fontend" style="width: <?php intval($_product->getrating()) >= 5 ? '100%' : ceil((intval($_product->getrating()) / 5)) . '%'?>"></span></span>
 <?php endif; ?>
 <?php echo $this->getChildHtml('product_type_data_extra') ?>
 <?php echo $this->getPriceHtml($_product) ?>

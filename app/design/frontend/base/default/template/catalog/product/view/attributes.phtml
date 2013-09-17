@@ -40,7 +40,7 @@
         <col width="44%" />
         <col />
         <tbody>
-        <?php foreach ($_additional as $_data): ?>
+        <?php foreach ($_additional as $_data): if($_data['code'] === 'english_subtitle') continue;?>
             <tr>
                 <th class="label"><?php echo $this->htmlEscape($this->__($_data['label'])) ?></th>
                 <td class="data"><?php echo $_helper->productAttribute($_product, $_data['value'], $_data['code']) ?></td>

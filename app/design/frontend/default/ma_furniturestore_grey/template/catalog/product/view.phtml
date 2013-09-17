@@ -165,10 +165,10 @@
     </div>
 
     <div class="product-collateral">
-            <?php if ($_product->getShortDescription()):?>
-                <div class="short-description">
+            <?php if ($_product->getDescription()):?>
+                <div class="description">
                     <h2><?php echo $this->__('Quick Overview') ?></h2>
-                    <div class="std"><?php echo $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description') ?></div>
+                    <div class="std"><?php echo $_helper->productAttribute($_product, nl2br($_product->getDescription()), 'description') ?></div>
                 </div>
             <?php endif;?>
     </div>
