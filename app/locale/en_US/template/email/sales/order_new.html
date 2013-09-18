@@ -39,27 +39,13 @@ body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;
                                 <h1 style="font-size: 22px; font-weight: normal; line-height: 22px; margin: 0 0 11px 0;">
                                     Hello,{{htmlescape var=$order.getCustomerName()}}
                                 </h1>
-                                <p style="font-size: 12px; line-height: 16px; margin: 0;">
-                                    Thank you for your order from {{var store.getFrontendName()}}.
-                                    Once your package ships we will send an email with a link to
-                                    track your order. You can check the status of your order by
-                                    <a href="{{store url="customer/account/"}}" style="color: #1E7EC8;">logging into your account</a>. If you have any questions about your order
-                                    please contact us at <a
-                                        href="mailto:{{config path='trans_email/ident_support/email'}}"
-                                        style="color: #1E7EC8;">{{config
-                                        path='trans_email/ident_support/email'}}</a> or call us at <span
-                                        class="nobr">{{config
-                                        path='general/store_information/phone'}}</span> Monday - Friday, 8am
-                                    - 5pm PST.
-                                </p>
-                                <p style="font-size: 12px; line-height: 16px; margin: 0;">Your
-                                    order confirmation is below. Thank you again for your business.</p>
+                                <p style="font-size: 12px; line-height: 16px; margin: 0;">Thank you for your order from {{var store.getFrontendName()}}. Once your package ships we will send an email with a link to track your order. You can check the status of your order by <a href="{{store url="customer/account/"}}" style="color: #1E7EC8;">logging into your account</a>. If you have any questions about your order please contact us at <a href="mailto:{{config path='trans_email/ident_support/email'}}" style="color: #1E7EC8;">{{config path='trans_email/ident_support/email'}}</a> or call us at <span class="nobr">{{config path='general/store_information/phone'}}</span> Monday - Friday, 8am - 5pm PST.</p>
+                                <p style="font-size: 12px; line-height: 16px; margin: 0;">Your order confirmation is below. Thank you again for your business.</p>
                         </tr>
                         <tr>
                             <td>
                                 <h2 style="font-size: 18px; font-weight: normal; margin: 0;">
-                                    Your Order #{{var order.increment_id}} 
-                                    <small>(placed on {{var order.getCreatedAtFormated('long')}})</small>
+                                    Your Order #{{var order.increment_id}} <small>(placed on {{var order.getCreatedAtFormated('long')}})</small>
                                 </h2>
                             </td>
                         </tr>
@@ -76,24 +62,33 @@ body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;
                                     <tbody>
                                         <tr>
                                             <td valign="top" style="font-size: 12px; padding: 7px 9px 9px 9px; border-left: 1px solid #EAEAEA; border-bottom: 1px solid #EAEAEA; border-right: 1px solid #EAEAEA;">
-                                                {{var order.getBillingAddress().format('html')}}<br />
-                                                <b>Payment Method: </b>{{var payment_html}}
+                                                {{var order.getBillingAddress().format('html')}}
                                             </td>
                                             <td>&nbsp;</td>
                                             <td valign="top" style="font-size: 12px; padding: 7px 9px 9px 9px; border-left: 1px solid #EAEAEA; border-bottom: 1px solid #EAEAEA; border-right: 1px solid #EAEAEA;">
-                                                {{var order.getShippingAddress().format('html')}}<br />
-                                                <b>Shipping Method: </b>{{var order.getShippingDescription()}}
+                                                {{var order.getShippingAddress().format('html')}}
                                             </td>
                                         </tr>
                                     </tbody>
-                                </table> <br /> {{depend order.getIsNotVirtual()}}
-                                <br /> {{/depend}} {{layout handle="sales_email_order_items" order=$order}}
+                                </table> <br /> 
+                                {{depend order.getIsNotVirtual()}}<br /> {{/depend}}
+                                {{layout handle="sales_email_order_items" order=$order}}
                                 <p style="font-size: 12px; margin: 0 0 10px 0">{{var order.getEmailCustomerNote()}}</p>
                             </td>
                         </tr>
                         <tr>
 		                  <td>
-			                    <d>Terms & Conditions:</b><br />
+		                      <div>
+		                          <b>Payment Method:</b><br />{{var payment_html}}
+		                      </div>
+		                      <div>
+		                          <b>Shipping Method:</b><br />{{var order.getShippingDescription()}}
+		                      </div>
+			              </td>
+			            </tr>
+                        <tr>
+		                  <td>
+			                    <b>Terms & Conditions:</b><br />
 			                    {{block type="cms/block" block_id="t_n_c_for_email" }}
 			              </td>
 			            </tr>
