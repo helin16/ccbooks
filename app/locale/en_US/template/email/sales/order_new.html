@@ -27,9 +27,11 @@ body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;
                     <table bgcolor="#FFFFFF" cellspacing="0" cellpadding="10" border="0" width="650" style="border: 1px solid #E0E0E0;">
                         <!-- [ header starts here] -->
                         <tr>
-                            <td valign="top"><a href="{{store url=""}}">
-                                 fdsfdsfsd<img src="{{var logo_url}}" alt="{{var logo_alt}}" style="margin-bottom: 10px;" border="0" />
-                            </a></td>
+                            <td valign="top">
+                                <a href="{{store url=""}}">
+                                    <img src="{{var logo_url}}" alt="{{var logo_alt}}" style="margin-bottom: 10px;" border="0" />
+                                </a>
+                            </td>
                         </tr>
                         <!-- [ middle starts here] -->
                         <tr>
@@ -87,6 +89,22 @@ body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;
                                 </table> <br /> {{depend order.getIsNotVirtual()}}
                                 <br /> {{/depend}} {{layout handle="sales_email_order_items" order=$order}}
                                 <p style="font-size: 12px; margin: 0 0 10px 0">{{var order.getEmailCustomerNote()}}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td bgcolor="#EAEAEA" align="center" style="background: #EAEAEA; text-align: center;">
+                                            Terms & Conditions:
+			                            </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                             {{block type="cms/block" block_id="home_right_01" }}
+                                        </td>
+                                    </tr>
+                                </table>
                             </td>
                         </tr>
                         <tr>
