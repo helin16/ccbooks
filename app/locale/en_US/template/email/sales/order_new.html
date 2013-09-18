@@ -78,12 +78,15 @@ body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;
                         </tr>
                         <tr>
 		                  <td>
-		                      <div>
-		                          <b>Payment Method:</b><br />{{var payment_html}}
-		                      </div>
-		                      <div>
-		                          <b>Shipping Method:</b><br />{{var order.getShippingDescription()}}
-		                      </div>
+		                      <span style="display: inline-block; font-size: 12px;">
+		                          <div style="font-size: 13px; padding: 5px 9px 6px 9px; line-height: 1em; background: #EAEAEA; width: 325">Payment Method:</div>
+		                          {{var payment_html}}
+		                      </span>
+		                      <span style="display: inline-block; width; 10px;"></th>
+		                      <span style="display: inline-block; font-size: 12px;">
+                                  <div style="font-size: 13px; padding: 5px 9px 6px 9px; line-height: 1em; background: #EAEAEA; width: 325">Shipping Method:</div>
+                                  {{var order.getShippingDescription()}}
+                              </span>
 			              </td>
 			            </tr>
                         <tr>
