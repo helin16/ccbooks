@@ -55,17 +55,7 @@
 								<?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>
 							<?php endif; ?>
 							<?php if( $this->getConfig('price') ): ?>
-							
-								<?php // get price ?>
-								<?php if ( ($_product->getSpecialPrice()) == NULL ) : ?>
 									<?php echo $this->getPriceHtml($_product, true) ?>
-								<?php else: ?>
-									<div class="price-box">
-										<span class="regular-price" id="product-price-26">
-										<span class="price">
-												<?php echo "$" . ($_product->getSpecialPrice()) ;?>          
-										</span></span>
-									</div>
 								<?php endif; ?>
 							
 							<?php endif; ?>
