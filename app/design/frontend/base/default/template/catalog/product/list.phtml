@@ -95,10 +95,17 @@
                 <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(135); ?>" width="135" height="135" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
                 <h2 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></a></h2>
                 <?php if($_product->getRatingSummary()): ?>
-                <?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>
+                    <?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>
                 <?php endif; ?>
-                <?php echo $this->getPriceHtml($_product, true) ?>
+                <?php echo $this->getPriceHtml($_product) ?>
                 <div class="actions">
+                    <div>
+                    	<span class="ratingWrapper displayinline">
+                            <?php if ($_product->getrating() && trim($_product->getrating()) !== '' && intval($_product->getrating()) > 0): ?>
+                               <span class="rating_stars"><span class="rating_stars fontend" style="width: <?php echo intval($_product->getrating()) >= 5 ? '100%' : ceil(($_product->getrating() / 5) * 100) . '%'?>"></span></span>
+                            <?php endif; ?>
+                        </span>
+                    </div>
                     <?php if($_product->isSaleable()): ?>
                         <button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button>
                     <?php else: ?>
