@@ -46,6 +46,8 @@
         <?php echo $this->escapeHtml($_item->getDescription()) ?>
     </td>
     <td align="left" valign="top" style="font-size:11px; padding:3px 9px; border-bottom:1px dotted #CCCCCC;"><?php echo $this->htmlEscape($this->getSku($_item)) ?></td>
+    <?php $product = Mage::getModel('catalog/product')->loadByAttribute('sku', $_item->getSku(), array('isbn_13')); ?>
+    <td align="left" valign="top" style="font-size:11px; padding:3px 9px; border-bottom:1px dotted #CCCCCC;"><?php echo $this->htmlEscape($product->getData('isbn_13')) ?></td>
     <td align="center" valign="top" style="font-size:11px; padding:3px 9px; border-bottom:1px dotted #CCCCCC;"><?php echo $_item->getQtyOrdered()*1 ?></td>
     <td align="right" valign="top" style="font-size:11px; padding:3px 9px; border-bottom:1px dotted #CCCCCC;">
         <?php if ($this->helper('tax')->displaySalesPriceExclTax($_order->getStore()) || $this->helper('tax')->displaySalesBothPrices($_order->getStore())): ?>
