@@ -55,14 +55,23 @@
                     <h2 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped; ?>"><?php echo $_helper->productAttribute($_product, $_product->getName() , 'name'); ?></a></h2>
 					<div class="product-english-title"><?php echo Mage::getResourceModel('catalog/product')->getAttributeRawValue($_product->getId(), 'english_subtitle', 1); ?></div>
 					<?php if($_product->getRatingSummary()): ?>
-                    <?php echo $this->getReviewsSummaryHtml($_product) ?>
+                        <?php echo $this->getReviewsSummaryHtml($_product) ?>
                     <?php endif; ?>
-                    <?php echo $this->getPriceHtml($_product, true) ?>
-                    <?php if($_product->isSaleable()): ?>
-                        <p><button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button></p>
-                    <?php else: ?>
-                        <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
-                    <?php endif; ?>
+                    <div class="priceratingwrapper">
+                   		<span class="priceWrapper displayinline">
+                            <?php echo $this->getPriceHtml($_product, true) ?>
+                        </span>
+                        <span class="ratingWrapper displayinline">
+                            <?php if($_product->isSaleable()): ?>
+                                <p><button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button></p>
+                            <?php else: ?>
+                                <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
+                            <?php endif; ?>
+                            <?php if ($_product->getrating() && trim($_product->getrating()) !== '' && intval($_product->getrating()) > 0): ?>
+                               <span class="rating_stars"><span class="rating_stars fontend" style="width: <?php echo intval($_product->getrating()) >= 5 ? '100%' : ceil(($_product->getrating() / 5) * 100) . '%'?>"></span></span>
+                            <?php endif; ?>
+                        </span>
+                    </div>
                     <div class="desc std">
                         <?php echo $_helper->productAttribute($_product, $_product->getShortDescription(), 'short_description') ?>
                         <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped ?>" class="link-learn"><?php echo $this->__('Learn More') ?></a>
