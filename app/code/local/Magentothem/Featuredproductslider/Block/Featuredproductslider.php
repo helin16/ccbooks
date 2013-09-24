@@ -16,9 +16,12 @@ class Magentothem_Featuredproductslider_Block_Featuredproductslider extends Mage
 	public function getProducts()
     {
     	$storeId    = Mage::app()->getStore()->getId();
-		$products = Mage::getResourceModel('catalog/product_collection')
-			->addAttributeToSelect(Mage::getSingleton('catalog/config')->getProductAttributes())
-			->addMinimalPrice()
+    	$category = Mage::getModel('catalog/category')->load($this->getConfig('category_id'));
+		$products = Mage::getResourceModel('catalog/product_collection');
+    	if(!is_null($category->getId()))
+    	    $products = $products->addCategoryFilter($category);
+		$products->addAttributeToSelect(Mage::getSingleton('catalog/config')->getProductAttributes())
+		    ->addMinimalPrice()
 			->addUrlRewrite()
 			->addTaxPercents()			
 			->addStoreFilter()
