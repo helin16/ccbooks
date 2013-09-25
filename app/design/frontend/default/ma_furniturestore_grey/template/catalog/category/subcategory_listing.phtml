@@ -1,0 +1,30 @@
+<?php 
+//get the current category
+$_cat = new Mage_Catalog_Block_Navigation();
+$currentCat = $_cat->getCurrentCategory();
+
+//get the children of the current category
+$subCats = Mage::getModel('catalog/category')->load($currentCat->getId())->getChildren();
+
+//get sub category ids
+$subCatIds = explode(',',$subCats);
+?>
+
+<?php if (count($subCatIds) > 1): ?>
+ <ul>
+  <?php foreach($subCatIds as $subCatId): ?>
+   <?php $subCat = Mage::getModel('catalog/category')->load($subCatId); ?>
+   <?php if($subCat->getIsActive()): ?>
+    <li>
+     <?php //display category image
+     if($subCat->getImageUrl()): ?>
+      <img src="<?php echo $subCat->getImageUrl(); ?>" />
+     <?php endif; ?>
+     <a href="<?php echo $subCat->getUrl(); ?>">
+     <?php echo $subCat->getName(); ?>
+     </a>
+    </li>
+   <?php endif; ?>
+  <?php endforeach; ?>
+ </ul>
+<?php endif; ?>
