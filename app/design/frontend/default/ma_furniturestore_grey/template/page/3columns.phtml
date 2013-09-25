@@ -49,10 +49,7 @@
                         <?php echo $this->getChildHtml('global_messages') ?>
                         <?php echo $this->getChildHtml('content') ?>
                     </div>
-                    <div class="col-left sidebar">
-                       <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('shopping_options')->toHtml() ?>
-                       <?php echo $this->getChildHtml('left') ?>
-                    </div>
+                    <div class="col-left sidebar"><?php echo $this->getChildHtml('left') ?></div>
                 </div>
                 <div class="col-right sidebar"><?php echo $this->getChildHtml('right') ?></div>
             </div>
