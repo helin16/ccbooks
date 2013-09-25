@@ -1,30 +1,27 @@
 <?php 
 //get the current category
-$_cat = new Mage_Catalog_Block_Navigation();
-$currentCat = $_cat->getCurrentCategory();
-
-//get the children of the current category
-$subCats = Mage::getModel('catalog/category')->load($currentCat->getId())->getChildren();
-
-//get sub category ids
-$subCatIds = explode(',',$subCats);
+$currentCatId = Mage::getModel('catalog/layer')->getCurrentCategory()->getId();
 ?>
-
-<?php if (count($subCatIds) > 1): ?>
- <ul>
-  <?php foreach($subCatIds as $subCatId): ?>
-   <?php $subCat = Mage::getModel('catalog/category')->load($subCatId); ?>
-   <?php if($subCat->getIsActive()): ?>
-    <li>
-     <?php //display category image
-     if($subCat->getImageUrl()): ?>
-      <img src="<?php echo $subCat->getImageUrl(); ?>" />
-     <?php endif; ?>
-     <a href="<?php echo $subCat->getUrl(); ?>">
-     <?php echo $subCat->getName(); ?>
-     </a>
-    </li>
-   <?php endif; ?>
-  <?php endforeach; ?>
- </ul>
-<?php endif; ?>
+<?php if($currentCatId != Mage::app()->getWebsite(true)->getDefaultStore()->getRootCategoryId()) :?>
+	<?php $subCats = Mage::getModel('catalog/category')->getCollection()->addIsActiveFilter()->addAttributeToFilter('parent_id', $currentCatId); //get the children of the current category?>
+    <?php if (count($subCats) > 0): ?>
+        <div class="block block-verticalmenu">
+            <div class="block-title">
+            	<strong><?php echo $this->__('Shop By:') ?></strong>
+            </div>
+            <div class="block-content">
+            	<b style="padding: 2px 0 2px 4px;"><?php echo $this->__('Category:') ?></b>
+            	<ul style="width: 206px;">
+                    <?php foreach($subCats->getAllIds() as $subCatId): ?>
+                        <?php $subCat = Mage::getModel('catalog/category')->load($subCatId); ?>
+                        <li style="position: relative; text-align: left;">
+                        	<a style="color: #575757; font-size: 11px;text-decoration: none;" href="<?php echo $subCat->getUrl(); ?>">
+                        	    <span style="cursor: pointer; display: block;padding: 2px 0 2px 15px;"><?php echo $subCat->getName() . " (" . $subCat->getProductCount(). ")"; ?></span>
+                        	</a>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        </div>
+    <?php endif;?>
+<?php endif;?>
