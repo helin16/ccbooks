@@ -43,7 +43,7 @@
         <?php foreach ($_additional as $_data): if(in_array($_data['code'], array('english_subtitle', 'chinese_price', 'rating'))) continue;?>
             <tr>
                 <th class="label"><?php echo $this->htmlEscape($this->__($_data['label'])) ?></th>
-                <td class="data"><?php echo $_helper->productAttribute($_product, $_data['value'], $_data['code']) ?></td>
+                <td class="data"><?php $_attribute = $_product->getResource()->getAttribute($_data['code']); echo (!is_null($_product->getData($_attribute->getAttributeCode())) && ((string)$_attribute->getFrontend()->getValue($_product) != '')) ? $_helper->productAttribute($_product, $_data['value'], $_data['code']) : '' ?></td>
             </tr>
         <?php endforeach; ?>
         </tbody>
