@@ -26,7 +26,7 @@
 }
 
 body {
-	background: #C3ECAB;
+	background: url(../images/bg-bd.jpg) 0 0 repeat;
 	font: 12px/1.55 Arial, Helvetica, sans-serif;
 	color: #181818;
 	text-align: center
@@ -2448,7 +2448,7 @@ tr.summary-details-excluded {
 
 .old-price .price {
 	font-weight: bold;
-	color: #cccccc;
+	color: #c76200;
 	text-decoration: line-through
 }
 
@@ -2465,7 +2465,7 @@ tr.summary-details-excluded {
 }
 
 .special-price .price {
-	font-size: 16px;
+	font-size: 13px;
 	font-weight: bold;
 	color: #c76200
 }
@@ -3523,7 +3523,8 @@ tr.summary-details-excluded {
 }
 
 .cart .title-buttons .checkout-types {
-	float: right
+	float: right;
+	padding: 8px 15px 0 0;
 }
 
 .cart .title-buttons .checkout-types li {
