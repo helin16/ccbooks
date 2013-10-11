@@ -291,12 +291,12 @@ ul,ol {
 
 .col2-set .col-1 {
 	float: left;
-	width: 48.5%
+	width: 100%
 }
 
 .col2-set .col-2 {
 	float: right;
-	width: 48.5%
+	display: none;
 }
 
 .col2-set .col-narrow {
