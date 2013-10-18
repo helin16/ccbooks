@@ -41,9 +41,9 @@
             <default_setup>
                 <connection>
                     <host><![CDATA[localhost]]></host>
-                    <username><![CDATA[root]]></username>
-                    <password><![CDATA[]]></password>
-                    <dbname><![CDATA[ccbooks]]></dbname>
+                    <username><![CDATA[mylinsco]]></username>
+                    <password><![CDATA[i1008323I!]]></password>
+                    <dbname><![CDATA[mylinsco_ccbooks]]></dbname>
                     <initStatements><![CDATA[SET NAMES utf8]]></initStatements>
                     <model><![CDATA[mysql4]]></model>
                     <type><![CDATA[pdo_mysql]]></type>
@@ -55,7 +55,7 @@
         <session_save><![CDATA[db]]></session_save>
         <cache>
             <backend>apc</backend>
-            <prefix>mystore_</prefix>
+            <prefix>MAGE_ccbooks</prefix>
         </cache>
     </global>
     <admin>

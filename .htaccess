@@ -1,4 +1,6 @@
 AddDefaultCharset utf-8
+#AddHandler application/x-httpd-php54s .php
+AddHandler fcgid54-script .php
 <IfModule mod_rewrite.c>
 RewriteEngine Off
 </IfModule>

@@ -1,4 +1,6 @@
-Options All -Indexes
+# For security reasons, Option all cannot be overridden.
+#Options All -Indexes
+Options ExecCGI Includes IncludesNOEXEC SymLinksIfOwnerMatch -Indexes
 <IfModule mod_php5.c>
 php_flag engine 0
 </IfModule>
@@ -11,7 +13,9 @@ Options -ExecCGI
 ############################################
 ## enable rewrites
 
-    Options +FollowSymLinks
+# For security reasons, Option followsymlinks cannot be overridden.
+#    Options +FollowSymLinks
+    Options +SymLinksIfOwnerMatch
     RewriteEngine on
 
 ############################################

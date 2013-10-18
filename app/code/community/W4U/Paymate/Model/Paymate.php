@@ -24,7 +24,7 @@ class W4U_Paymate_Model_Paymate extends Mage_Payment_Model_Method_Abstract
     const REQUEST_AMOUNT_EDITABLE = 'N';
 
     protected $_code  = 'paymate';
-    protected $_formBlockType = 'W4U_paymate_block_form';
+    //protected $_formBlockType = 'Block/Form';
     protected $_allowCurrencyCode = array('AUD', 'EUR', 'GBP', 'NZD', 'USD');
     
     protected $_isGateway               = false;
