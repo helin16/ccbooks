@@ -1,3 +1,4 @@
+<div class="block block-cart">
 	<?php
 		function cut_string2($string,$number){
 			if(strlen($string) <= $number) {
@@ -29,7 +30,7 @@
 			    <?php if( !$this->getConfig('items') ) { $_columnCount = 1 ; } else { $_columnCount = $this->getConfig('items'); }?>
 			    <?php $i=0; foreach ($_productCollection as $_product): ?>
 			        <?php if ( $i++ % $_columnCount==0): ?>
-			        <ul style="background-image:none;" class="products-grid <?php if( $i == 1 ) echo ' first';?>">
+			        <ul style="background-image:none;" class="products-grid <?php if( $i == 1 ) echo ' first';?>" >
 			        <?php endif ?>
 			        	<?php 
 			        		if ( !$this->getConfig('width') ){
@@ -98,5 +99,5 @@
 		<?php endif; ?> <!-- end exist product -->
 	</div> <!-- end products list -->
 <?php } ?>
-
+</div>
 
