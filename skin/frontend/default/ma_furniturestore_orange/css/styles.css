@@ -796,7 +796,7 @@ tr.summary-details-excluded { font-style:italic; }
 .category-products {}
 
 /* View Type: Grid */
-.products-grid { border-bottom:1px solid #dadada; background:url(../images/bkg_grid.gif) 0 0 repeat; position:relative; }
+.products-grid { border-bottom:0; background:url(../images/bkg_grid.gif) 0 0 repeat; position:relative; }
 .products-grid.last { border-bottom:0; }
 .products-grid li.item { float:left; width:146px; padding:15px 15px 50px; text-align: center; }
 .products-grid .product-image { display:block; width:135px; height:135px; margin:0 0 20px; }
