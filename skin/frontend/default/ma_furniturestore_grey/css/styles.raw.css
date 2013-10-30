@@ -26,7 +26,7 @@
 }
 
 body {
-    background: #acf0a7; /* background: url(../images/bg-bd.jpg) 0 0 repeat;*/
+    background: transparent url(http://ccbooks.com.au/skin/frontend/default/ma_furniturestore_grey/images/bg-bd.jpg); /* background: url(../images/bg-bd.jpg) 0 0 repeat;*/
     font: 12px/1.55 Arial, Helvetica, sans-serif;
     color: #181818;
     text-align: center
@@ -277,7 +277,7 @@ ul,ol {
 
 .col3-layout .col-main {
     width: 528px;
-    border: 1px solid #dadada
+    border: none;
 }
 
 .col3-layout .col-wrapper {
@@ -1629,7 +1629,10 @@ tr.summary-details-excluded {
     border: 1px solid #dadada;
     margin: 0 0 10px
 }
-
+.block1 {
+	border: 1px solid #dadada;
+	margin: 0 0 0px
+}
 .block .block-title {
     background: url(../images/bkg_block-title.gif) 0 100% repeat-x #f8f8f8;
     padding: 7px 9px 8px 10px
@@ -2123,7 +2126,7 @@ tr.summary-details-excluded {
 }
 
 .products-grid {
-    border-bottom: 1px solid #dadada;
+    border-bottom: none;
     position: relative
 }
 
@@ -2465,7 +2468,7 @@ tr.summary-details-excluded {
 }
 
 .special-price .price {
-    font-size: 13px;
+    font-size: 16px;
     font-weight: bold;
     color: #c76200
 }
@@ -2740,7 +2743,7 @@ tr.summary-details-excluded {
 }
 
 .product-essential h2 {
-    font: bold 16px/1.35 Arial, Helvetica, sans-serif
+    font: bold 14px/1.35 Arial, Helvetica, sans-serif
 }
 
 .product-collateral {
@@ -2915,7 +2918,7 @@ tr.summary-details-excluded {
 
 .product-view .product-shop .product-name h1 {
     margin: 0;
-    font: bold 22px/1.35 Arial, Helvetica, sans-serif
+    font: bold 16px/1.35 Arial, Helvetica, sans-serif
 }
 
 .product-view .product-shop .availability {
@@ -3399,8 +3402,13 @@ tr.summary-details-excluded {
 .product-name a {
     color: #1c1c1c;
     text-decoration: none;
-    font-size: 13px;
+    font-size: 16px;
     font-weight: bold
+}
+
+.ma-featured-slider .product-name a,
+.products-grid .product-name a {
+	font-size: 12px;
 }
 
 .product-name a:hover {
@@ -5687,4 +5695,9 @@ tr.summary-details-excluded {
 a.top-link-cart {
     background: url(./../images/shoppingcart.png) 0 0 no-repeat;
     padding: 0 0 0 22px
+}
+
+.old-price .price {
+	width: 100px;
+	display: inline-block;
 }
